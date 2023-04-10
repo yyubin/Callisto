@@ -4,7 +4,6 @@ import (
 	"admin-server/admin/models"
 	"admin-server/platform/database"
 	"strconv"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -70,7 +69,7 @@ func GetNotice(c *fiber.Ctx) error {
 }
 
 func CreateNotice(c *fiber.Ctx) error {
-	// jwt 검사 로직 일단 보류
+	// jwt
 	//now := time.Now().Unix()
 
 	//claims, err := utils.ExtractTokenMetadata(c)
@@ -90,7 +89,7 @@ func CreateNotice(c *fiber.Ctx) error {
 	// 	})
 	// }
 
-	notice := &models.Notice{}
+	notice := &models.NoticeUploadDto{}
 
 	if err := c.BodyParser(notice); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -106,8 +105,6 @@ func CreateNotice(c *fiber.Ctx) error {
 			"msg":   err.Error(),
 		})
 	}
-
-	notice.CreatedAt = time.Now()
 
 	if err := db.CreateNotice(notice); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{

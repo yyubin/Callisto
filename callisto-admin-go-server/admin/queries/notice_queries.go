@@ -35,10 +35,12 @@ func (q *NoticeQueries) GetNotice(id int) (models.Notice, error) {
 	return notice, nil
 }
 
-func (q *NoticeQueries) CreateNotice(n *models.Notice) error {
-	query := `INSERT INTO notice VALUES ($1, $2, $3, $4)`
+func (q *NoticeQueries) CreateNotice(n *models.NoticeUploadDto) error {
+	e := models.NoticeUploadDtoToEntity(n)
 
-	_, err := q.Exec(query, n.NoticeTitle, n.NoticeContents, n.ProfileId)
+	query := `INSERT INTO notice (notice_title, notice_contents, profile_id) VALUES ($1, $2, $3);`
+
+	_, err := q.Exec(query, e.NoticeTitle, e.NoticeContents, e.ProfileId)
 	if err != nil {
 		return err
 	}

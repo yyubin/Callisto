@@ -6,10 +6,16 @@ import (
 	"strconv"
 	"time"
 
+	_ "github.com/jackc/pgx/v4/stdlib" // load pgx driver for PostgreSQL
 	"github.com/jmoiron/sqlx"
+	"github.com/joho/godotenv"
 )
 
 func PostgreSQLConnection() (*sqlx.DB, error) {
+	if err := godotenv.Load(); err != nil {
+		return nil, fmt.Errorf("error loading .env file, %w", err)
+	}
+
 	maxConn, _ := strconv.Atoi(os.Getenv("DB_MAX_CONNECTIONS"))
 	maxIdleConn, _ := strconv.Atoi(os.Getenv("DB_MAX_IDLE_CONNECTIONS"))
 	maxLifetimeConn, _ := strconv.Atoi(os.Getenv("DB_MAX_LIFETIME_CONNECTIONS"))

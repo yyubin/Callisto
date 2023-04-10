@@ -12,9 +12,9 @@ type NoticeQueries struct {
 
 func (q *NoticeQueries) GetNotices() ([]models.Notice, error) {
 	notices := []models.Notice{}
-	query := `SELECT * FROM notice`
+	query := `SELECT notice_id, notice_title, notice_contents, profile_id, created_at, updated_at FROM notice`
 
-	err := q.Get(&notices, query)
+	err := q.Select(&notices, query)
 	if err != nil {
 		return notices, err
 	}
@@ -25,7 +25,7 @@ func (q *NoticeQueries) GetNotices() ([]models.Notice, error) {
 func (q *NoticeQueries) GetNotice(id int) (models.Notice, error) {
 	notice := models.Notice{}
 
-	query := `SELECT * FROM notice WHERE notice_id = $1`
+	query := `SELECT notice_id, notice_title, notice_contents, profile_id, created_at, updated_at FROM notice WHERE notice_id = $1`
 
 	err := q.Get(&notice, query, id)
 	if err != nil {

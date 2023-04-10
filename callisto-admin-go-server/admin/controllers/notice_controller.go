@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"admin-server/admin/models"
-	"admin-server/pkg/utils"
 	"admin-server/platform/database"
 	"strconv"
 	"time"
@@ -22,18 +21,18 @@ func GetNotices(c *fiber.Ctx) error {
 	notices, err := db.GetNotices()
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"error": true,
-			"msg":   "Notices were not found",
-			"count": 0,
-			"books": nil,
+			"error":   true,
+			"msg":     "Notices were not found",
+			"count":   0,
+			"notices": nil,
 		})
 	}
 
 	return c.JSON(fiber.Map{
-		"error": false,
-		"msg":   nil,
-		"count": len(notices),
-		"books": notices,
+		"error":   false,
+		"msg":     nil,
+		"count":   len(notices),
+		"notices": notices,
 	})
 }
 
@@ -71,24 +70,25 @@ func GetNotice(c *fiber.Ctx) error {
 }
 
 func CreateNotice(c *fiber.Ctx) error {
-	now := time.Now().Unix()
+	// jwt 검사 로직 일단 보류
+	//now := time.Now().Unix()
 
-	claims, err := utils.ExtractTokenMetadata(c)
-	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": true,
-			"msg":   err.Error(),
-		})
-	}
+	//claims, err := utils.ExtractTokenMetadata(c)
+	// if err != nil {
+	// 	return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+	// 		"error": true,
+	// 		"msg":   err.Error(),
+	// 	})
+	// }
 
-	expires := claims.Expires
+	// //expires := claims.Expires
 
-	if now > expires {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"error": true,
-			"msg":   "unauthorized, check expiration time of your token",
-		})
-	}
+	// if now > expires {
+	// 	return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+	// 		"error": true,
+	// 		"msg":   "unauthorized, check expiration time of your token",
+	// 	})
+	// }
 
 	notice := &models.Notice{}
 

@@ -1,13 +1,14 @@
 package main
 
 import (
-	"admin-server/admin"
+	"admin-server/pkg/configs"
+	"admin-server/pkg/utils"
 	"context"
 	"fmt"
 	"log"
-	"net/http"
 	"sync"
 
+	"github.com/gofiber/fiber/v2"
 	"github.com/hashicorp/consul/api"
 	"github.com/segmentio/kafka-go"
 )
@@ -34,9 +35,13 @@ func main() {
 		log.Fatal("Falied to register service to Consul")
 	}
 
+	fiberConfig := configs.FiberConfig()
+
+	app := fiber.New(fiberConfig)
+
 	// http 서버 실행
 	go func() {
-		log.Fatal(http.ListenAndServe(":3000", admin.NewHttpHandler()))
+		utils.StartServerWithGracefulShutdown(app)
 	}()
 
 	// kafka 구독

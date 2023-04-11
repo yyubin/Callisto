@@ -2,6 +2,7 @@ package main
 
 import (
 	"admin-server/pkg/configs"
+	middleware "admin-server/pkg/middlewares"
 	"admin-server/pkg/routes"
 	"admin-server/pkg/utils"
 
@@ -95,6 +96,9 @@ func main() {
 
 	// Define a new Fiber app with config.
 	app := fiber.New(config)
+
+	// Middlewares.
+	middleware.FiberMiddleware(app)
 
 	// Routes.
 	routes.SwaggerRoute(app)  // Register a route for API Docs (Swagger).

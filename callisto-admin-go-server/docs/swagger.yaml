@@ -6,15 +6,20 @@ definitions:
       created_at:
         type: string
       notice_contents:
+        example: notice_contents
         type: string
       notice_id:
         type: integer
       notice_title:
+        example: notice_title
         type: string
       profile_id:
+        example: profile_id
         type: string
       updated_at:
         type: string
+    required:
+    - profile_id
     type: object
 host: localhost:5001
 info:
@@ -29,27 +34,15 @@ info:
   title: Fiber Example API
   version: "1.0"
 paths:
-  /notice:
+  /admin/notice:
     post:
       consumes:
       - application/json
       description: Create a new notice.
       parameters:
-      - description: NoticeTitle
+      - description: Notice
         in: body
-        name: notice_title
-        required: true
-        schema:
-          type: string
-      - description: NoticeContents
-        in: body
-        name: notice_contents
-        required: true
-        schema:
-          type: string
-      - description: ProfileId
-        in: body
-        name: profile_id
+        name: notice
         required: true
         schema:
           type: string
@@ -63,7 +56,48 @@ paths:
       summary: create a new notice
       tags:
       - Notice
-  /notice/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update notice.
+      parameters:
+      - description: Notice
+        in: body
+        name: notice
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: ok
+          schema:
+            type: string
+      summary: update notice
+      tags:
+      - Notice
+  /admin/notice/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete notice by given ID.
+      parameters:
+      - description: Notice ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ok
+          schema:
+            type: string
+      summary: delete notice by given ID
+      tags:
+      - Notice
     get:
       consumes:
       - application/json
@@ -82,7 +116,7 @@ paths:
           schema:
             $ref: '#/definitions/models.Notice'
       summary: Get a notice by ID
-  /notices:
+  /admin/notices:
     get:
       consumes:
       - application/json

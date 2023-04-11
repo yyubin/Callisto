@@ -24,7 +24,39 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/notice": {
+        "/admin/notice": {
+            "put": {
+                "description": "Update notice.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Notice"
+                ],
+                "summary": "update notice",
+                "parameters": [
+                    {
+                        "description": "Notice",
+                        "name": "notice",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Create a new notice.",
                 "consumes": [
@@ -39,26 +71,8 @@ const docTemplate = `{
                 "summary": "create a new notice",
                 "parameters": [
                     {
-                        "description": "NoticeTitle",
-                        "name": "notice_title",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "NoticeContents",
-                        "name": "notice_contents",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "ProfileId",
-                        "name": "profile_id",
+                        "description": "Notice",
+                        "name": "notice",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -76,7 +90,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/notice/{id}": {
+        "/admin/notice/{id}": {
             "get": {
                 "description": "Get notice by ID",
                 "consumes": [
@@ -103,9 +117,39 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "delete": {
+                "description": "Delete notice by given ID.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Notice"
+                ],
+                "summary": "delete notice by given ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Notice ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         },
-        "/notices": {
+        "/admin/notices": {
             "get": {
                 "description": "Get notices",
                 "consumes": [
@@ -130,21 +174,27 @@ const docTemplate = `{
         "models.Notice": {
             "description": "공지사항 모델",
             "type": "object",
+            "required": [
+                "profile_id"
+            ],
             "properties": {
                 "created_at": {
                     "type": "string"
                 },
                 "notice_contents": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "notice_contents"
                 },
                 "notice_id": {
                     "type": "integer"
                 },
                 "notice_title": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "notice_title"
                 },
                 "profile_id": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "profile_id"
                 },
                 "updated_at": {
                     "type": "string"

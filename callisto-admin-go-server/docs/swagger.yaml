@@ -1,0 +1,98 @@
+basePath: /
+definitions:
+  models.Notice:
+    description: 공지사항 모델
+    properties:
+      created_at:
+        type: string
+      notice_contents:
+        type: string
+      notice_id:
+        type: integer
+      notice_title:
+        type: string
+      profile_id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+host: localhost:5001
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: This is a sample swagger for Fiber
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Fiber Example API
+  version: "1.0"
+paths:
+  /notice:
+    post:
+      consumes:
+      - application/json
+      description: Create a new notice.
+      parameters:
+      - description: NoticeTitle
+        in: body
+        name: notice_title
+        required: true
+        schema:
+          type: string
+      - description: NoticeContents
+        in: body
+        name: notice_contents
+        required: true
+        schema:
+          type: string
+      - description: ProfileId
+        in: body
+        name: profile_id
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Notice'
+      summary: create a new notice
+      tags:
+      - Notice
+  /notice/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get notice by ID
+      parameters:
+      - description: Notice ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Notice'
+      summary: Get a notice by ID
+  /notices:
+    get:
+      consumes:
+      - application/json
+      description: Get notices
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Notice'
+      summary: Get notices
+swagger: "2.0"

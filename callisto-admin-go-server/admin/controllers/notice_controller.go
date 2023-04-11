@@ -8,6 +8,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// GetNotices godoc
+// @Summary Get notices
+// @Description Get notices
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.Notice
+// @Router /notices [get]
 func GetNotices(c *fiber.Ctx) error {
 	db, err := database.OpenDBConnection()
 	if err != nil {
@@ -35,6 +42,14 @@ func GetNotices(c *fiber.Ctx) error {
 	})
 }
 
+// GetNotice godoc
+// @Summary Get a notice by ID
+// @Description Get notice by ID
+// @Accept json
+// @Produce json
+// @Param id path int true "Notice ID"
+// @Success 200 {object} models.Notice
+// @Router /notice/{id} [get]
 func GetNotice(c *fiber.Ctx) error {
 	id, err := strconv.Atoi(c.Params("id"))
 	if err != nil {
@@ -68,6 +83,16 @@ func GetNotice(c *fiber.Ctx) error {
 	})
 }
 
+// @Description Create a new notice.
+// @Summary create a new notice
+// @Tags Notice
+// @Accept json
+// @Produce json
+// @Param notice_title body string true "NoticeTitle"
+// @Param notice_contents body string true "NoticeContents"
+// @Param profile_id body uuid true "ProfileId"
+// @Success 200 {object} models.Notice
+// @Router /notice [post]
 func CreateNotice(c *fiber.Ctx) error {
 	// jwt
 	//now := time.Now().Unix()

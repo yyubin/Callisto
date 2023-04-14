@@ -12,9 +12,9 @@ func PublicRoutes(a *fiber.App) {
 	route := a.Group("/admin")
 
 	// Routes for GET method:
-	route.Get("/notices", controllers.GetNotices)         // get list of all notices
-	route.Get("/notice/:id", controllers.GetNotice)       // get one notice by ID
-	route.Post("/notice", controllers.CreateNotice)       // post one notice
-	route.Put("/notice", controllers.UpdateNotice)        // update one notice
-	route.Delete("/notice/:id", controllers.DeleteNotice) // delete one notice by ID
+	route.Get("/notices", controllers.GetNotices)   // get list of all notices
+	route.Get("/notice/:id", controllers.GetNotice) // get one notice by ID
+
+	route.Get("/emails", controllers.GetEmails)
+	route.Get("/email/:company_id", controllers.GetEmailsByCompanyName)
 }

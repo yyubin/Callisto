@@ -1,5 +1,16 @@
 basePath: /
 definitions:
+  models.Email:
+    properties:
+      company_id:
+        type: string
+      company_name:
+        type: string
+      email_domain:
+        type: string
+      email_valid_id:
+        type: integer
+    type: object
   models.Notice:
     description: 공지사항 모델
     properties:
@@ -34,6 +45,106 @@ info:
   title: Fiber Example API
   version: "1.0"
 paths:
+  /admin/email:
+    post:
+      consumes:
+      - application/json
+      description: Create a new email.
+      parameters:
+      - description: Email
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Email'
+      summary: create a new email
+      tags:
+      - Email
+    put:
+      consumes:
+      - application/json
+      description: Update email.
+      parameters:
+      - description: Email
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: ok
+          schema:
+            type: string
+      summary: update email
+      tags:
+      - Email
+  /admin/email/{company_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get email
+      parameters:
+      - description: Company ID
+        in: path
+        name: company_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Email'
+      summary: Get email
+      tags:
+      - Email
+  /admin/email/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete email by given ID.
+      parameters:
+      - description: Email ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ok
+          schema:
+            type: string
+      summary: delete email by given ID
+      tags:
+      - Email
+  /admin/emails:
+    get:
+      consumes:
+      - application/json
+      description: Get emails
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Email'
+      summary: Get emails
+      tags:
+      - Email
   /admin/notice:
     post:
       consumes:

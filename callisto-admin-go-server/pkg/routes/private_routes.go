@@ -15,4 +15,7 @@ func PrivateRoutes(a *fiber.App) {
 	route.Put("/notice", controllers.UpdateNotice)        // update one notice
 	route.Delete("/notice/:id", controllers.DeleteNotice) // delete one notice by ID
 
+	route.Post("/email", controllers.CreateEmail)
+	route.Put("/email", controllers.UpdateEmail)
+	route.Delete("/email/:id", controllers.DeleteEmail)
 }

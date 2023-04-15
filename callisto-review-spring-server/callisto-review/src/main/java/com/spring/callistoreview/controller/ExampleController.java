@@ -28,6 +28,6 @@ public class ExampleController {
 
         companyRepository.save(company);
 
-        return "success";
+        return company.getCompanyId().toString();
     }
 }

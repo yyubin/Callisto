@@ -1,5 +1,7 @@
 package com.spring.callistoreview.db.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -8,6 +10,7 @@ import java.util.UUID;
 public class CompanyReview {
 
     @Id @GeneratedValue
+    @Type(type="uuid-char")
     private UUID companyReviewId;
 
     @OneToOne
@@ -28,9 +31,9 @@ public class CompanyReview {
 
     private double directorStars;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime deletedAt;
 

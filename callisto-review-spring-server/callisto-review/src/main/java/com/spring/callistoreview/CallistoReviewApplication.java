@@ -22,7 +22,8 @@ public class CallistoReviewApplication implements CommandLineRunner {
 
     @Override
     public void run(String... ars) throws Exception {
-        restTemplate.getForObject("http://localhost:8666/example-data", String.class);
+        String result = restTemplate.getForObject("http://localhost:8666/example-data", String.class);
+        System.out.println(result);
     }
 
 }

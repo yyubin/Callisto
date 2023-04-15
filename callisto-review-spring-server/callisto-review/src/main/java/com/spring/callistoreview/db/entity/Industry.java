@@ -2,6 +2,7 @@ package com.spring.callistoreview.db.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,13 +15,14 @@ import java.util.UUID;
 public class Industry {
 
     @Id @GeneratedValue
+    @Type(type="uuid-char")
     private UUID industryId;
 
     private String industryName;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime deletedAt;
 

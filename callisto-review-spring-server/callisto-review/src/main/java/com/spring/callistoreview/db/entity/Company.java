@@ -2,6 +2,7 @@ package com.spring.callistoreview.db.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.UUID;
 public class Company {
 
     @Id @GeneratedValue
+    @Type(type="uuid-char")
     private UUID companyId;
 
     private String companyName;
@@ -25,9 +27,13 @@ public class Company {
     @JoinColumn(name = "companyImageId")
     private CompanyImage companyImage;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime deletedAt;
+
+    public Company() {
+        // 기본 생성자
+    }
 }

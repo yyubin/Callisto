@@ -1,5 +1,7 @@
 package com.spring.callistoreview.db.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -10,6 +12,7 @@ import java.util.UUID;
 public class CompanyImage {
 
     @Id
+    @Type(type="uuid-char")
     private UUID companyImageId;
 
     @OneToOne

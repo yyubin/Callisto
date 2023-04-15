@@ -2,6 +2,7 @@ package com.spring.callistoreview.db.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import java.util.UUID;
 public class Review {
 
     @Id @GeneratedValue
+    @Type(type="uuid-char")
     private UUID reviewId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,9 +46,9 @@ public class Review {
     @JoinColumn(name = "reviewLikeId")
     private List<ReviewLike> reviewLike;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime deletedAt;
 

@@ -12,7 +12,7 @@ public class ReviewLike {
 
     private UUID profileId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewId")
     private Review review;
 

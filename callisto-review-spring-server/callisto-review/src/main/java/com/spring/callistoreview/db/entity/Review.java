@@ -1,17 +1,22 @@
 package com.spring.callistoreview.db.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
 public class Review {
 
     @Id @GeneratedValue
     private UUID reviewId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "companyReviewId")
     private CompanyReview companyReview;
 

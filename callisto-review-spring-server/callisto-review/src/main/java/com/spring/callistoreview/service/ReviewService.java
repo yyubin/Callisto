@@ -1,13 +1,9 @@
 package com.spring.callistoreview.service;
 
-import com.spring.callistoreview.db.entity.Company;
-import com.spring.callistoreview.db.entity.CompanyReview;
-import com.spring.callistoreview.db.entity.Review;
-import com.spring.callistoreview.db.entity.ReviewLike;
-import com.spring.callistoreview.db.repository.CompanyRepository;
-import com.spring.callistoreview.db.repository.CompanyReviewRepository;
-import com.spring.callistoreview.db.repository.ReviewLikeRepository;
-import com.spring.callistoreview.db.repository.ReviewRepository;
+import com.spring.callistoreview.db.entity.*;
+import com.spring.callistoreview.db.repository.*;
+import com.spring.callistoreview.exception.ErrorMessage;
+import com.spring.callistoreview.exception.NotFoundProfileException;
 import com.spring.callistoreview.model.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +21,8 @@ public class ReviewService {
 
     private final CompanyReviewRepository companyReviewRepository;
     private final ReviewRepository reviewRepository;
+    private final ProfileRepository profileRepository;
+    private final CompanyUserRepository companyUserRepository;
 
     public List<ReviewDto> GetReviews(UUID companyId) throws Exception {
         Company company = companyRepository.findByCompanyId(companyId);
@@ -36,7 +34,11 @@ public class ReviewService {
     @Transactional
     public void InsertReview(ReviewDto reviewDto) throws Exception {
         Company company = companyRepository.findByCompanyId(reviewDto.getCompanyId());
+        Profile profile = profileRepository.findByProfileId(reviewDto.getProfileId());
 
+        if (!companyUserRepository.findByCompanyAndProfile(company, profile)) {
+            throw new NotFoundProfileException(ErrorMessage.NOT_MATCH_USER_COMPANY.getMessage());
+        }
 
         CompanyReview companyReview = companyReviewRepository.findByCompany(company);
 

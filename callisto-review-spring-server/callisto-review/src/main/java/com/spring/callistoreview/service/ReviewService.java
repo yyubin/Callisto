@@ -36,6 +36,8 @@ public class ReviewService {
     @Transactional
     public void InsertReview(ReviewDto reviewDto) throws Exception {
         Company company = companyRepository.findByCompanyId(reviewDto.getCompanyId());
+
+
         CompanyReview companyReview = companyReviewRepository.findByCompany(company);
 
         reviewRepository.save(Review.createReview(reviewDto, company, companyReview));

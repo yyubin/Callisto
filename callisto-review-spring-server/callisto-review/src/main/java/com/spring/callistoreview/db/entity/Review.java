@@ -1,5 +1,7 @@
 package com.spring.callistoreview.db.entity;
 
+import com.spring.callistoreview.model.ReviewDto;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
@@ -11,7 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Setter
+@Builder
 public class Review {
 
     @Id @GeneratedValue
@@ -55,5 +57,26 @@ public class Review {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime deletedAt;
+
+    public Review() {
+
+    }
+
+    public static Review createReview(ReviewDto reviewDto, Company company, CompanyReview companyReview) {
+        return  Review.builder()
+                .company(company)
+                .companyReview(companyReview)
+                .profileId(reviewDto.getProfileId())
+                .totalStars(reviewDto.getTotalStars())
+                .careerStars(reviewDto.getCareerStars())
+                .cultureStars(reviewDto.getCultureStars())
+                .directorStars(reviewDto.getDirectorStars())
+                .salaryStars(reviewDto.getSalaryStars())
+                .lifeStars(reviewDto.getLifeStars())
+                .title(reviewDto.getTitle())
+                .positiveContents(reviewDto.getPositiveContents())
+                .negativeContents(reviewDto.getNegativeContents())
+                .build();
+    }
 
 }

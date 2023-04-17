@@ -1,0 +1,14 @@
+# 베이스 이미지
+FROM openjdk:17-jdk-alpine
+
+# 어플리케이션 JAR 파일 복사
+COPY target/*.jar app.jar
+
+# 어플리케이션 실행
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+# 어플리케이션 실행 포트
+EXPOSE 8666
+
+# 빌드 명령어
+RUN ./gradlew build

@@ -16,11 +16,11 @@ public class CompanyUser {
     @Type(type="uuid-char")
     private UUID companyUserId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profileId")
     private Profile profile;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "companyId")
     private Company company;
 

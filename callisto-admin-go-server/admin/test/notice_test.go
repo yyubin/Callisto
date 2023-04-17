@@ -15,6 +15,7 @@ import (
 
 type fakeDB struct {
 	notices []models.Notice
+	emails []models.Email
 }
 
 func (f *fakeDB) GetNotices() ([]models.Notice, error) {

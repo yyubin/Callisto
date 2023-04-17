@@ -22,6 +22,10 @@ public class Review {
     @JoinColumn(name = "companyReviewId")
     private CompanyReview companyReview;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
+    private Company company;
+
     private UUID profileId;
 
     private double totalStars;

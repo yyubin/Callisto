@@ -1,5 +1,6 @@
 package com.spring.callistoreview.db.entity;
 
+import lombok.Getter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Getter
 public class CompanyReview {
 
     @Id @GeneratedValue

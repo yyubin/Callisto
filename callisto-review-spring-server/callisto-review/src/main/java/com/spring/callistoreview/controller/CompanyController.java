@@ -14,15 +14,14 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/review/company")
+@RequestMapping("/company")
 public class CompanyController {
 
     private final CompanyService companyService;
 
     @GetMapping("/{companyId}")
     public CompanyDto getCompanyById(@PathVariable UUID companyId) throws Exception {
-        CompanyDto companyDto = companyService.getCompanyById(companyId);
-        return companyDto;
+        return companyService.getCompanyById(companyId);
     }
 
 }

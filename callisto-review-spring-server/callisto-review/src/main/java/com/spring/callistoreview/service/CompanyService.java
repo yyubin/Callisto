@@ -18,7 +18,6 @@ public class CompanyService {
 
     public CompanyDto getCompanyById(UUID companyId) {
         Company company = companyRepository.findByCompanyId(companyId);
-        System.out.println(company);
         return CompanyDto.builder()
                 .companyId(company.getCompanyId())
                 .companyName(company.getCompanyName())

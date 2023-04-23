@@ -1,5 +1,6 @@
 package com.spring.callistoreview.db.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.hibernate.annotations.Type;
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Builder
+@AllArgsConstructor
 public class CompanyUser {
 
     @Id @GeneratedValue

@@ -1,9 +1,6 @@
 package com.spring.callistoreview.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -11,6 +8,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @ToString
+@AllArgsConstructor
 public class CompanyDto {
 
     private UUID companyId;

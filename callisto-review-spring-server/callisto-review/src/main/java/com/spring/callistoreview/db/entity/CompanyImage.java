@@ -1,5 +1,7 @@
 package com.spring.callistoreview.db.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.OneToOne;
 import java.util.UUID;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class CompanyImage {
 
     @Id

@@ -2,10 +2,7 @@ package com.spring.callistoreview.model;
 
 import com.spring.callistoreview.db.entity.Company;
 import com.spring.callistoreview.db.entity.CompanyReview;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,6 +11,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @ToString
+@AllArgsConstructor
 public class CompanyReviewDto {
 
     private UUID companyReviewId;

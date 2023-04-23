@@ -4,10 +4,7 @@ import com.spring.callistoreview.db.entity.Company;
 import com.spring.callistoreview.db.entity.CompanyReview;
 import com.spring.callistoreview.db.entity.Review;
 import com.spring.callistoreview.db.entity.ReviewLike;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -20,6 +17,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @ToString
+@AllArgsConstructor
 public class ReviewDto {
 
     private UUID reviewId;

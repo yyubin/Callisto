@@ -1,6 +1,8 @@
 package com.spring.callistoreview.db.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
@@ -11,7 +13,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Industry {
 
     @Id @GeneratedValue

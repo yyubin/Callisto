@@ -2,6 +2,7 @@ package com.spring.callistoreview.db.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Company {
 
     @Id @GeneratedValue
@@ -35,7 +37,4 @@ public class Company {
 
     private LocalDateTime deletedAt;
 
-    public Company() {
-        // 기본 생성자
-    }
 }

@@ -9,6 +9,7 @@ import java.util.UUID;
 @Builder
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class CompanyDto {
 
     private UUID companyId;

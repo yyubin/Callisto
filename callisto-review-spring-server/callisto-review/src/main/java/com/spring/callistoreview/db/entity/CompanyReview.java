@@ -15,6 +15,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class CompanyReview {
 
     @Id @GeneratedValue
@@ -44,9 +45,6 @@ public class CompanyReview {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime deletedAt;
-
-    public CompanyReview() {
-    }
 
     public static CompanyReview createReviewAndUpdateCompanyReview(CompanyReview companyReview, ReviewDto review) {
         int oldReviewCount = companyReview.reviewCount;

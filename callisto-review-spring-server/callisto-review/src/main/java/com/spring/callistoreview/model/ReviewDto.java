@@ -18,6 +18,7 @@ import java.util.UUID;
 @Builder
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class ReviewDto {
 
     private UUID reviewId;
@@ -53,10 +54,6 @@ public class ReviewDto {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime deletedAt;
-
-    public ReviewDto() {
-
-    }
 
     public static List<ReviewDto> createReviews(List<Review> reviewList) {
         List<ReviewDto> reviewDtoList = new ArrayList<>();

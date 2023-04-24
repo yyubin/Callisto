@@ -12,6 +12,7 @@ import java.util.UUID;
 @Builder
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class CompanyReviewDto {
 
     private UUID companyReviewId;
@@ -37,10 +38,6 @@ public class CompanyReviewDto {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime deletedAt;
-
-    public CompanyReviewDto() {
-
-    }
 
     public static CompanyReviewDto createCompanyReviewDto(CompanyReview companyReview) {
         return CompanyReviewDto.builder()

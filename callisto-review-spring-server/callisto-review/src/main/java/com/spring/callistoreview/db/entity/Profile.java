@@ -3,6 +3,7 @@ package com.spring.callistoreview.db.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Profile {
 
     @Id
@@ -23,7 +25,4 @@ public class Profile {
 
     private int jobId;
 
-    public Profile() {
-
-    }
 }

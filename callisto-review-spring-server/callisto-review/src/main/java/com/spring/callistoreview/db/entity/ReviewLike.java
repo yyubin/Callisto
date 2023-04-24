@@ -1,6 +1,7 @@
 package com.spring.callistoreview.db.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class ReviewLike {
 
     @Id @GeneratedValue

@@ -61,8 +61,12 @@ public class ReviewDto {
     public static List<ReviewDto> createReviews(List<Review> reviewList) {
         List<ReviewDto> reviewDtoList = new ArrayList<>();
         for (Review review: reviewList) {
+
+            if (review.getCompany() == null) {
+                continue;
+            }
+
             ReviewDto reviewDto = new ReviewDto();
-            reviewDto.setCompanyReviewId(review.getCompanyReview().getCompanyReviewId());
             reviewDto.setCompanyId(review.getCompany().getCompanyId());
             reviewDto.setTotalStars(review.getTotalStars());
             reviewDto.setCareerStars(review.getCareerStars());
@@ -72,8 +76,15 @@ public class ReviewDto {
             reviewDto.setSalaryStars(review.getSalaryStars());
             reviewDto.setPositiveContents(review.getPositiveContents());
             reviewDto.setNegativeContents(review.getNegativeContents());
+
+            if (review.getReviewLike() == null) {
+                reviewDto.setReviewLikeCount(0);
+            } else {
+                reviewDto.setReviewLikeCount(review.getReviewLike().size());
+            }
+
+
             reviewDto.setProfileId(review.getProfileId());
-            reviewDto.setReviewLikeCount(review.getReviewLike().size());
             reviewDto.setCreatedAt(review.getCreatedAt());
             reviewDto.setUpdatedAt(review.getUpdatedAt());
             reviewDtoList.add(reviewDto);
@@ -83,7 +94,6 @@ public class ReviewDto {
 
     public static ReviewDto createReview(Review review) {
         return ReviewDto.builder()
-                .companyReviewId(review.getCompanyReview().getCompanyReviewId())
                 .companyId(review.getCompany().getCompanyId())
                 .totalStars(review.getTotalStars())
                 .careerStars(review.getCareerStars())

@@ -42,7 +42,7 @@ public class ReviewService {
 
         CompanyReview companyReview = companyReviewRepository.findByCompany(company);
 
-        reviewRepository.save(Review.createReview(reviewDto, company, companyReview));
+        reviewRepository.save(Review.createReview(reviewDto, company));
         companyReviewRepository.save(CompanyReview.createReviewAndUpdateCompanyReview(companyReview, reviewDto));
     }
 }

@@ -1,10 +1,7 @@
 package com.spring.callistoreview.db.entity;
 
 import com.spring.callistoreview.model.ReviewDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -16,15 +13,12 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Review {
 
     @Id @GeneratedValue
     @Type(type="uuid-char")
     private UUID reviewId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "companyReviewId")
-    private CompanyReview companyReview;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "companyId")
@@ -60,14 +54,13 @@ public class Review {
 
     private LocalDateTime deletedAt;
 
-    public Review() {
-
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
-    public static Review createReview(ReviewDto reviewDto, Company company, CompanyReview companyReview) {
+    public static Review createReview(ReviewDto reviewDto, Company company) {
         return  Review.builder()
                 .company(company)
-                .companyReview(companyReview)
                 .profileId(reviewDto.getProfileId())
                 .totalStars(reviewDto.getTotalStars())
                 .careerStars(reviewDto.getCareerStars())

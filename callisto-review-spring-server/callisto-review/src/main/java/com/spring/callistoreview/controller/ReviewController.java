@@ -24,4 +24,9 @@ public class ReviewController {
     public void InsertReview(@RequestBody ReviewDto reviewDto) throws Exception {
         reviewService.InsertReview(reviewDto);
     }
+
+    @DeleteMapping("/review")
+    public void DeleteReview(@RequestBody UUID profileId) throws Exception {
+
+    }
 }

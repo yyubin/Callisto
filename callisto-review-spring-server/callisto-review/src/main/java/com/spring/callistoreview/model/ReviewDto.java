@@ -64,6 +64,7 @@ public class ReviewDto {
             }
 
             ReviewDto reviewDto = new ReviewDto();
+            reviewDto.setCompanyReviewId(review.getCompanyReviewId());
             reviewDto.setCompanyId(review.getCompany().getCompanyId());
             reviewDto.setTotalStars(review.getTotalStars());
             reviewDto.setCareerStars(review.getCareerStars());

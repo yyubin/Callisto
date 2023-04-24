@@ -82,43 +82,5 @@ public class CompanyReview {
         this.directorStars = directorStars;
     }
 
-    public static CompanyReview createReviewAndUpdateCompanyReview(CompanyReview companyReview, ReviewDto review) {
-        int oldReviewCount = companyReview.reviewCount;
-        int newReviewCount = companyReview.reviewCount + 1;
-
-        double oldTotalStars = companyReview.totalStars * oldReviewCount;
-        double oldCareerStars = companyReview.careerStars * oldReviewCount;
-        double oldLifeStars = companyReview.lifeStars * oldReviewCount;
-        double oldSalaryStars = companyReview.salaryStars * oldReviewCount;
-        double oldCultureStars = companyReview.cultureStars * oldReviewCount;
-        double oldDirectorStars = companyReview.directorStars * oldReviewCount;
-
-        double newTotalStars = oldTotalStars + review.getTotalStars();
-        double newCareerStars = oldCareerStars + review.getCareerStars();
-        double newLifeStars = oldLifeStars + review.getLifeStars();
-        double newSalaryStars = oldSalaryStars + review.getSalaryStars();
-        double newCultureStars = oldCultureStars + review.getCultureStars();
-        double newDirectorStars = oldDirectorStars + review.getDirectorStars();
-
-        double newAvgTotalStars = newTotalStars / newReviewCount;
-        double newAvgCareerStars = newCareerStars / newReviewCount;
-        double newAvgLifeStars = newLifeStars / newReviewCount;
-        double newAvgSalaryStars = newSalaryStars / newReviewCount;
-        double newAvgCultureStars = newCultureStars / newReviewCount;
-        double newAvgDirectorStars = newDirectorStars / newReviewCount;
-
-        return CompanyReview.builder()
-                .companyReviewId(companyReview.getCompanyReviewId())
-                .company(companyReview.company)
-                .totalStars(newAvgTotalStars)
-                .careerStars(newAvgCareerStars)
-                .lifeStars(newAvgLifeStars)
-                .salaryStars(newAvgSalaryStars)
-                .cultureStars(newAvgCultureStars)
-                .directorStars(newAvgDirectorStars)
-                .updatedAt(LocalDateTime.now())
-                .build();
-
-    }
 
 }

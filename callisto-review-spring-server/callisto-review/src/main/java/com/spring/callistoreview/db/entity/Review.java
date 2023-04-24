@@ -26,6 +26,8 @@ public class Review {
 
     private UUID profileId;
 
+    private UUID companyReviewId;
+
     private double totalStars;
 
     private double careerStars;
@@ -61,6 +63,7 @@ public class Review {
     public static Review createReview(ReviewDto reviewDto, Company company) {
         return  Review.builder()
                 .company(company)
+                .companyReviewId(reviewDto.getCompanyReviewId())
                 .profileId(reviewDto.getProfileId())
                 .totalStars(reviewDto.getTotalStars())
                 .careerStars(reviewDto.getCareerStars())

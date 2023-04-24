@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Company {
@@ -37,4 +36,15 @@ public class Company {
 
     private LocalDateTime deletedAt;
 
+    public void setCompanyId(UUID companyId) {
+        this.companyId = companyId;
+    }
+
+    public void setIndustry(Industry industry) {
+        this.industry = industry;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 }

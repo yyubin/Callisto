@@ -25,4 +25,8 @@ public class Profile {
 
     private int jobId;
 
+    public void setProfileId(UUID profileId) {
+        this.profileId = profileId;
+    }
+
 }

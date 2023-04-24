@@ -46,6 +46,42 @@ public class CompanyReview {
 
     private LocalDateTime deletedAt;
 
+    public void setCompanyReviewId(UUID companyReviewId) {
+        this.companyReviewId = companyReviewId;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
+    public void setTotalStars(double totalStars) {
+        this.totalStars = totalStars;
+    }
+
+    public void setCareerStars(double careerStars) {
+        this.careerStars = careerStars;
+    }
+
+    public void setLifeStars(double lifeStars) {
+        this.lifeStars = lifeStars;
+    }
+
+    public void setSalaryStars(double salaryStars) {
+        this.salaryStars = salaryStars;
+    }
+
+    public void setCultureStars(double cultureStars) {
+        this.cultureStars = cultureStars;
+    }
+
+    public void setDirectorStars(double directorStars) {
+        this.directorStars = directorStars;
+    }
+
     public static CompanyReview createReviewAndUpdateCompanyReview(CompanyReview companyReview, ReviewDto review) {
         int oldReviewCount = companyReview.reviewCount;
         int newReviewCount = companyReview.reviewCount + 1;

@@ -48,6 +48,25 @@ public class ReviewService {
     }
 
     @Transactional
+    public void UpdateReview(ReviewDto reviewDto) throws Exception {
+        Company company = companyRepository.findByCompanyId(reviewDto.getCompanyId());
+        Profile profile = profileRepository.findByProfileId(reviewDto.getProfileId());
+
+        if (!companyUserRepository.findByCompanyAndProfile(company, profile)) {
+            throw new NotFoundProfileException(ErrorMessage.NOT_MATCH_USER_COMPANY.getMessage());
+        }
+
+        CompanyReview companyReview = companyReviewRepository.findByCompany(company);
+        Review oldReview = reviewRepository.findByProfileId(reviewDto.getProfileId());
+
+        companyReviewRepository.save(UpdateReviewAndUpdateCompanyReview(companyReview, oldReview, reviewDto));
+        Review newReview = Review.updateReview(reviewDto, oldReview);
+
+        oldReview.updateFrom(newReview);
+        reviewRepository.save(oldReview);
+    }
+
+    @Transactional
     public void DeleteReview(UUID profileId) throws Exception {
         // (추가 예정) JWT parser 사용해서 받은 profileId와 jwt 로그인 아이디가 동일한지 확인해야 함
         Review review = reviewRepository.findByProfileId(profileId);
@@ -121,6 +140,43 @@ public class ReviewService {
         double newAvgSalaryStars = newSalaryStars / newReviewCount;
         double newAvgCultureStars = newCultureStars / newReviewCount;
         double newAvgDirectorStars = newDirectorStars / newReviewCount;
+
+        return CompanyReview.builder()
+                .companyReviewId(companyReview.getCompanyReviewId())
+                .company(companyReview.getCompany())
+                .totalStars(newAvgTotalStars)
+                .careerStars(newAvgCareerStars)
+                .lifeStars(newAvgLifeStars)
+                .salaryStars(newAvgSalaryStars)
+                .cultureStars(newAvgCultureStars)
+                .directorStars(newAvgDirectorStars)
+                .updatedAt(LocalDateTime.now())
+                .build();
+    }
+
+    public CompanyReview UpdateReviewAndUpdateCompanyReview(CompanyReview companyReview, Review oldReview, ReviewDto updateReview) {
+        int ReviewCount = companyReview.getReviewCount();
+
+        double oldTotalStars = companyReview.getTotalStars() * ReviewCount;
+        double oldCareerStars = companyReview.getCareerStars() * ReviewCount;
+        double oldLifeStars = companyReview.getLifeStars() * ReviewCount;
+        double oldSalaryStars = companyReview.getSalaryStars() * ReviewCount;
+        double oldCultureStars = companyReview.getCultureStars() * ReviewCount;
+        double oldDirectorStars = companyReview.getDirectorStars() * ReviewCount;
+
+        double newTotalStars = oldTotalStars - oldReview.getTotalStars() + updateReview.getTotalStars();
+        double newCareerStars = oldCareerStars - oldReview.getCareerStars() + updateReview.getCareerStars();
+        double newLifeStars = oldLifeStars - oldReview.getLifeStars() + updateReview.getLifeStars();
+        double newSalaryStars = oldSalaryStars - oldReview.getSalaryStars() + updateReview.getSalaryStars();
+        double newCultureStars = oldCultureStars - oldReview.getCultureStars() + updateReview.getCultureStars();
+        double newDirectorStars = oldDirectorStars - oldReview.getDirectorStars() + updateReview.getDirectorStars();
+
+        double newAvgTotalStars = newTotalStars / ReviewCount;
+        double newAvgCareerStars = newCareerStars / ReviewCount;
+        double newAvgLifeStars = newLifeStars / ReviewCount;
+        double newAvgSalaryStars = newSalaryStars / ReviewCount;
+        double newAvgCultureStars = newCultureStars / ReviewCount;
+        double newAvgDirectorStars = newDirectorStars / ReviewCount;
 
         return CompanyReview.builder()
                 .companyReviewId(companyReview.getCompanyReviewId())

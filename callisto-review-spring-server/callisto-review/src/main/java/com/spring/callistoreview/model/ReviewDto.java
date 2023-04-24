@@ -29,17 +29,17 @@ public class ReviewDto {
 
     private UUID profileId;
 
-    private double totalStars;
+    private Double totalStars;
 
-    private double careerStars;
+    private Double careerStars;
 
-    private double lifeStars;
+    private Double lifeStars;
 
-    private double salaryStars;
+    private Double salaryStars;
 
-    private double cultureStars;
+    private Double cultureStars;
 
-    private double directorStars;
+    private Double directorStars;
 
     private String title;
 

@@ -25,8 +25,13 @@ public class ReviewController {
         reviewService.InsertReview(reviewDto);
     }
 
+    @PutMapping("/review")
+    public void UpdateReview(@RequestBody ReviewDto reviewDto) throws Exception {
+        reviewService.UpdateReview(reviewDto);
+    }
+
     @DeleteMapping("/review")
     public void DeleteReview(@RequestBody UUID profileId) throws Exception {
-
+        reviewService.DeleteReview(profileId);
     }
 }

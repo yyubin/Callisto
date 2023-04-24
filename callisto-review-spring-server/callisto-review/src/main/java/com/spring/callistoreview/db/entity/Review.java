@@ -28,17 +28,17 @@ public class Review {
 
     private UUID companyReviewId;
 
-    private double totalStars;
+    private Double totalStars;
 
-    private double careerStars;
+    private Double careerStars;
 
-    private double lifeStars;
+    private Double lifeStars;
 
-    private double salaryStars;
+    private Double salaryStars;
 
-    private double cultureStars;
+    private Double cultureStars;
 
-    private double directorStars;
+    private Double directorStars;
 
     private String title;
 
@@ -77,4 +77,50 @@ public class Review {
                 .build();
     }
 
+    public static Review updateReview(ReviewDto reviewDto, Review oldReivew) {
+        return Review.builder()
+                .company(oldReivew.company)
+                .companyReviewId(oldReivew.getCompanyReviewId())
+                .profileId(oldReivew.getProfileId())
+                .totalStars(reviewDto.getTotalStars())
+                .careerStars(reviewDto.getCareerStars())
+                .cultureStars(reviewDto.getCultureStars())
+                .directorStars(reviewDto.getDirectorStars())
+                .salaryStars(reviewDto.getSalaryStars())
+                .lifeStars(reviewDto.getLifeStars())
+                .title(reviewDto.getTitle())
+                .positiveContents(reviewDto.getPositiveContents())
+                .negativeContents(reviewDto.getNegativeContents())
+                .build();
+    }
+
+    public void updateFrom(Review newReview) {
+        if (newReview.getTotalStars() != null) {
+            this.totalStars = newReview.getTotalStars();
+        }
+        if (newReview.getCareerStars() != null) {
+            this.careerStars = newReview.getCareerStars();
+        }
+        if (newReview.getCultureStars() != null) {
+            this.cultureStars = newReview.getCultureStars();
+        }
+        if (newReview.getDirectorStars() != null) {
+            this.directorStars = newReview.getDirectorStars();
+        }
+        if (newReview.getLifeStars() != null) {
+            this.lifeStars = newReview.getLifeStars();
+        }
+        if (newReview.getSalaryStars() != null) {
+            this.salaryStars = newReview.getSalaryStars();
+        }
+        if (newReview.getTitle() != null) {
+            this.title = newReview.getTitle();
+        }
+        if (newReview.getPositiveContents() != null) {
+            this.positiveContents = newReview.getPositiveContents();
+        }
+        if (newReview.getNegativeContents() != null) {
+            this.negativeContents = newReview.getNegativeContents();
+        }
+    }
 }

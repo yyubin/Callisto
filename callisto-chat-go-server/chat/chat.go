@@ -2,19 +2,24 @@ package chat
 
 import (
 	"chat/utils"
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/gorilla/websocket"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Chat struct {
-	users    map[string]*User
-	messages chan *Message
-	join     chan *User
-	leave    chan *User
+	users      map[string]*User
+	messages   chan *Message
+	join       chan *User
+	leave      chan *User
+	collection *mongo.Collection
 }
 
 var upgrader = websocket.Upgrader{
@@ -73,6 +78,12 @@ func (c *Chat) add(user *User) {
 
 func (c *Chat) broadcast(message *Message) {
 	log.Printf("Broadcast message: %v\n", message)
+
+	_, err := c.collection.InsertOne(context.Background(), bson.M{"username": message.Sender, "body": message.Body, "time": time.Now()})
+	if err != nil {
+		log.Printf("Error inserting message into MongoDB: %v\n", err)
+	}
+
 	for _, user := range c.users {
 		user.Write(message)
 	}
@@ -92,11 +103,15 @@ func Start(port string) {
 
 	log.Printf("Chat listening on http://localhost%s\n", port)
 
+	client, collection := utils.ConnectMongoDB()
+	defer client.Disconnect(context.Background())
+
 	c := &Chat{
-		users:    make(map[string]*User),
-		messages: make(chan *Message),
-		join:     make(chan *User),
-		leave:    make(chan *User),
+		users:      make(map[string]*User),
+		messages:   make(chan *Message),
+		join:       make(chan *User),
+		leave:      make(chan *User),
+		collection: collection,
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

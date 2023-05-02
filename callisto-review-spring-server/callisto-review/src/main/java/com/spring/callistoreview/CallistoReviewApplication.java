@@ -1,15 +1,16 @@
 package com.spring.callistoreview;
 
-import com.spring.callistoreview.db.entity.Industry;
-import com.spring.callistoreview.db.repository.IndustryRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableDiscoveryClient
+@EnableFeignClients
 public class CallistoReviewApplication implements CommandLineRunner {
 
     @Autowired

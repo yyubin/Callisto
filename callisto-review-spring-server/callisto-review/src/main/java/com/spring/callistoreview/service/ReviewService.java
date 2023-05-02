@@ -1,5 +1,6 @@
 package com.spring.callistoreview.service;
 
+import com.spring.callistoreview.config.feign.fegininterface.ConfigClient;
 import com.spring.callistoreview.db.entity.*;
 import com.spring.callistoreview.db.repository.*;
 import com.spring.callistoreview.exception.ErrorMessage;
@@ -25,6 +26,8 @@ public class ReviewService {
     private final ProfileRepository profileRepository;
     private final CompanyUserRepository companyUserRepository;
 
+    private final ConfigClient configClient;
+
     public List<ReviewDto> GetReviews(UUID companyId) throws Exception {
         Company company = companyRepository.findByCompanyId(companyId);
         List<Review> reviewList = reviewRepository.findByCompany(company);
@@ -45,6 +48,7 @@ public class ReviewService {
 
         reviewRepository.save(Review.createReview(reviewDto, company));
         companyReviewRepository.save(CreateReviewAndUpdateCompanyReview(companyReview, reviewDto));
+        configClient.AddPointOfReview(reviewDto.getTitle());
     }
 
     @Transactional

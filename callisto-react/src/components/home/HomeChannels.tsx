@@ -1,14 +1,9 @@
-import React from "react";
-import GNB from "../common/GNB";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import BottomNavi from "../common/BottomNavi";
+import { BiChevronLeft } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import GNBShort from "../common/GNBShort";
 
 const HomeChannels = () => {
   return (
     <main>
-      <GNBShort />
       <section className="flex gap-x-20">
         <span>
           <Link to="/">
@@ -71,7 +66,6 @@ const HomeChannels = () => {
           <div className="ml-32 bg-gray-200 w-50 h-6 solid">팔로우</div>
         </div>
       </section>
-      <BottomNavi />
     </main>
   );
 };

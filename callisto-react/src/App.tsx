@@ -1,34 +1,47 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Test from "./pages/Write";
-import Hire from "./components/home/Hire";
-import Popular from "./components/home/Popular";
-import Category from "./components/home/Category";
-import Chat from "./components/home/Chat";
-import Company from "./pages/Company";
-import Notice from "./pages/Notice";
-import Profile from "./pages/Profile";
-import HomeChannels from "./components/home/HomeChannels";
-import HireSearch from "./components/home/HireSearch";
-import { useState } from "react";
-import data from "./data/index.js";
+import { useLocation } from "react-router-dom";
+import Path from "./utils/path/routes";
+import { useLayoutEffect, useState } from "react";
 import GNB from "./components/common/GNB";
+import BottomNavi from "./components/common/BottomNavi";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
+import UnauthenticatedRoutes from "./routes/UnauthenticatedRoutes";
 
 function App() {
+  const location = useLocation();
+  const { HOME } = Path;
+
+  const [hasNav, setHasNav] = useState<boolean>(false);
+  const [RoutesComponent, setRoutesComponent] =
+    useState<React.ReactElement | null>(null);
+
+  // const authToken = token.getToken("token");
+  const [임시, set임시] = useState<boolean>(false);
+
+  useLayoutEffect(() => {
+    // const authToken = token.getToken("token");
+    !임시 && setRoutesComponent(<ProtectedRoutes />);
+    임시 && setRoutesComponent(<UnauthenticatedRoutes />);
+  }, [임시]);
+
+  useLayoutEffect(() => {
+    const pathname =
+      location.pathname.endsWith("/") && location.pathname.length > 1
+        ? location.pathname.slice(0, -1)
+        : location.pathname;
+
+    const hasNav = [HOME].includes(pathname);
+
+    setHasNav(hasNav);
+  }, []);
+
   return (
-    <Routes>
-      <Route path={"/"} element={<Home />} />
-      <Route path={"/channel"} element={<HomeChannels />} />
-      <Route path={"/hire"} element={<Hire />} />
-      <Route path={"/hire/search"} element={<HireSearch />} />
-      <Route path={"/popular"} element={<Popular />} />
-      <Route path={"/category"} element={<Category />} />
-      <Route path={"/chat"} element={<Chat />} />
-      <Route path={"/company"} element={<Company />} />
-      <Route path={"/write"} element={<Test />} />
-      <Route path={"/notice"} element={<Notice />} />
-      <Route path={"/profile"} element={<Profile />} />
-    </Routes>
+    <div className="w-full max-w-[424px] h-full min-h-screen bg-gray-200">
+      <header className="w-full px-4 bg-main-contra">
+        {hasNav && <GNB />}
+      </header>
+      <main className="w-full px-4">{RoutesComponent}</main>
+      <BottomNavi />
+    </div>
   );
 }
 

@@ -1,13 +1,9 @@
-import BottomNavi from "@/components/common/BottomNavi";
-import GNB from "@/components/common/GNB";
-import React from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
     <main className="h-screen">
-      <GNB />
       <section className="flex items-center justify-center h-[37%] m-auto">
         <div className="h-[90%] w-[90%] bg-gray-100">프로필화면입니다.</div>
       </section>
@@ -29,7 +25,6 @@ const Profile = () => {
       <section className="flex items-center justify-center h-[37%] m-auto">
         <div className="h-[90%] w-[90%] bg-gray-100">프로필화면입니다.</div>
       </section>
-      <BottomNavi />
     </main>
   );
 };

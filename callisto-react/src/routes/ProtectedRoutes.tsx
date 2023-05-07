@@ -28,9 +28,8 @@ const ProtectedRoutes = () => {
       <Route path={COMPANY} element={<Company />} />
       <Route path={HOME} element={<Home />} />
       <Route path={NOTICE} element={<Notice />} />
-      <Route path={PROFILE} element={<Profile />} />
+      <Route path={LOGIN} element={<Profile />} />
       <Route path={WRITE} element={<Write />} />
-      <Route path={LOGIN} element={<Login />} />
       <Route path={SIGNUP} element={<Signup />} />
       <Route path="*" element={<Navigate replace to={HOME} />} />
     </Routes>

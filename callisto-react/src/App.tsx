@@ -5,6 +5,7 @@ import GNB from "./components/common/GNB";
 import BottomNavi from "./components/common/BottomNavi";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import UnauthenticatedRoutes from "./routes/UnauthenticatedRoutes";
+import token from "./libs/token";
 
 function App() {
   const location = useLocation();
@@ -26,14 +27,13 @@ function App() {
   const [RoutesComponent, setRoutesComponent] =
     useState<React.ReactElement | null>(null);
 
-  // const authToken = token.getToken("token");
-  const [임시, set임시] = useState<boolean>(false);
+  const authToken = token.get();
 
   useLayoutEffect(() => {
-    // const authToken = token.getToken("token");
-    !임시 && setRoutesComponent(<ProtectedRoutes />);
-    임시 && setRoutesComponent(<UnauthenticatedRoutes />);
-  }, [임시]);
+    const authToken = token.get();
+    !authToken && setRoutesComponent(<ProtectedRoutes />);
+    !!authToken && setRoutesComponent(<UnauthenticatedRoutes />);
+  }, [authToken]);
 
   useLayoutEffect(() => {
     const pathname =

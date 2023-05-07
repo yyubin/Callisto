@@ -8,7 +8,19 @@ import UnauthenticatedRoutes from "./routes/UnauthenticatedRoutes";
 
 function App() {
   const location = useLocation();
-  const { HOME } = Path;
+  const {
+    HOME,
+    CATEGORY,
+    CHANNEL,
+    COMPANY,
+    HIRE,
+    LOGIN,
+    NOTICE,
+    POPULAR,
+    PROFILE,
+    SIGNUP,
+    WRITE,
+  } = Path;
 
   const [hasNav, setHasNav] = useState<boolean>(false);
   const [RoutesComponent, setRoutesComponent] =
@@ -29,7 +41,19 @@ function App() {
         ? location.pathname.slice(0, -1)
         : location.pathname;
 
-    const hasNav = [HOME].includes(pathname);
+    const hasNav = [
+      HOME,
+      CATEGORY,
+      CHANNEL,
+      COMPANY,
+      HIRE,
+      LOGIN,
+      NOTICE,
+      POPULAR,
+      PROFILE,
+      SIGNUP,
+      WRITE,
+    ].includes(pathname);
 
     setHasNav(hasNav);
   }, []);
@@ -39,7 +63,7 @@ function App() {
       <header className="w-full px-4 bg-main-contra">
         {hasNav && <GNB />}
       </header>
-      <main className="w-full px-4">{RoutesComponent}</main>
+      <main className="w-full h-full p-4">{RoutesComponent}</main>
       <BottomNavi />
     </div>
   );

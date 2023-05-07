@@ -1,8 +1,23 @@
+import Path from "@/utils/path/routes";
 import { Link } from "react-router-dom";
 
 const BottomNavi = () => {
   const liStyle =
     "flex items-center justify-center w-1/5 h-full cursor-pointer text-3xl hover:bg-main";
+
+  const {
+    CATEGORY,
+    CHANNEL,
+    COMPANY,
+    HIRE,
+    HOME,
+    LOGIN,
+    NOTICE,
+    POPULAR,
+    PROFILE,
+    SIGNUP,
+    WRITE,
+  } = Path;
 
   return (
     <nav className="fixed bottom-0 right-0 left-0 h-20 bg-main">
@@ -19,7 +34,7 @@ const BottomNavi = () => {
         <Link className={liStyle} to="/">
           알람
         </Link>
-        <Link className={liStyle} to="/login">
+        <Link className={liStyle} to={LOGIN}>
           my
         </Link>
       </ul>

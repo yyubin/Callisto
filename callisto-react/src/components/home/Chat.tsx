@@ -1,12 +1,8 @@
-import React from "react";
-import GNB from "../common/GNB";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import BottomNavi from "../common/BottomNavi";
 
 const Chat = () => {
   return (
     <main className="h-screen">
-      <GNB />
       <section className="flex items-center justify-center h-[37%] m-auto">
         <div className="h-[90%] w-[90%] bg-gray-100">채팅방입니다.</div>
       </section>
@@ -26,7 +22,6 @@ const Chat = () => {
       <section className="flex items-center justify-center h-[37%] m-auto">
         <div className="h-[90%] w-[90%] bg-gray-100">채팅방입니다.</div>
       </section>
-      <BottomNavi />
     </main>
   );
 };

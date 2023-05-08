@@ -1,34 +1,45 @@
-import React from "react";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import BottomNavi from "../common/BottomNavi";
-import GNB from "../common/GNB";
-import { Link } from "react-router-dom";
+import MainButton from "@/styles/styled-button";
+import Path from "@/utils/path/routes";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Hire = () => {
-  return (
-    <main className="h-screen">
-      <GNB />
-      <section className="flex justify-around items-center  h-16 border-b-4">
-        <Link to="/hire">
-          <div className="bg-black text-white h-10 w-40 leading-9 text-center">
-            포지션
-          </div>
-        </Link>
+  const navigate = useNavigate();
+  const { HIRE } = Path;
 
-        <Link to="/hire/search">
-          <div className="bg-gray-100 h-10 w-40 leading-9 text-center">
-            채용 검색
-          </div>
-        </Link>
-      </section>
-      <section className="flex items-center justify-center h-[34%] m-auto">
-        <div className="h-[90%] w-[90%] bg-gray-100">채용화면입니다.</div>
-      </section>
-      <section className="flex items-center justify-center h-[34%] m-auto">
-        <div className="h-[90%] w-[90%] bg-gray-100">채용화면입니다.</div>
-      </section>
-      <BottomNavi />
-    </main>
+  const [selectTab, setSelectTab] = useState<boolean>(false);
+
+  return (
+    <div className="w-full h-screen flex flex-col gap-2 py-4">
+      <div className="flex justify-between items-center gap-4">
+        <MainButton
+          className="w-1/2"
+          onClick={() => {
+            setSelectTab(true);
+          }}
+        >
+          포지션
+        </MainButton>
+        <MainButton
+          className="w-1/2"
+          onClick={() => {
+            setSelectTab(false);
+          }}
+        >
+          채용 검색
+        </MainButton>
+      </div>
+      {/* TODO 채용화면 컴포넌트로 나눠도되고 바로써도되고*/}
+      {selectTab ? (
+        <section className="flex items-center justify-center">
+          <div className="w-full bg-gray-100">포지션</div>
+        </section>
+      ) : (
+        <section className="flex items-center justify-center">
+          <div className="w-full bg-gray-100">채용화면입니다.</div>
+        </section>
+      )}
+    </div>
   );
 };
 

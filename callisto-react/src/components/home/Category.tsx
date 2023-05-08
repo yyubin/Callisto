@@ -1,7 +1,4 @@
-import React from "react";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import BottomNavi from "../common/BottomNavi";
-import { Link } from "react-router-dom";
+import { BiChevronLeft } from "react-icons/bi";
 import Path from "@/utils/path/routes";
 import dataList from "@/data";
 import iconBase from "@assets/img/CompanyImg.png";
@@ -55,7 +52,6 @@ const Category = () => {
             <div className="ml-32 bg-gray-200 w-50 h-6 solid">팔로우</div>
           </div>
         </section>
-        <BottomNavi />
       </main>
     </>
   );
